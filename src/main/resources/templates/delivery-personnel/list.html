@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>外送員列表</title>
+</head>
+<body>
+<h1>外送員列表</h1>
+<a href="/delivery-personnel/add">添加新外送員</a>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>姓名</th>
+        <th>電話</th>
+        <th>交通工具</th>
+        <th>狀態</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="deliveryPersonnel : ${deliveryPersonnels}">
+        <td th:text="${deliveryPersonnel.deliveryId}"></td>
+        <td th:text="${deliveryPersonnel.deliveryName}"></td>
+        <td th:text="${deliveryPersonnel.deliveryPhone}"></td>
+        <td th:text="${deliveryPersonnel.deliveryVehicle}"></td>
+        <td th:text="${deliveryPersonnel.deliveryStatus}"></td>
+        <td>
+            <a th:href="@{/delivery-personnel/edit/{id}(id=${deliveryPersonnel.deliveryId})}">編輯</a>
+            <a th:href="@{/delivery-personnel/delete/{id}(id=${deliveryPersonnel.deliveryId})}">刪除</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="/">返回主頁</a>
+</body>
+</html>

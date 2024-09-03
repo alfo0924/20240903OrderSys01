@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>餐廳列表</title>
+</head>
+<body>
+<h1>餐廳列表</h1>
+<a href="/restaurants/add">添加新餐廳</a>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>名稱</th>
+        <th>地址</th>
+        <th>電話</th>
+        <th>類型</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="restaurant : ${restaurants}">
+        <td th:text="${restaurant.restaurantId}"></td>
+        <td th:text="${restaurant.restaurantName}"></td>
+        <td th:text="${restaurant.restaurantAddress}"></td>
+        <td th:text="${restaurant.restaurantPhone}"></td>
+        <td th:text="${restaurant.restaurantType}"></td>
+        <td>
+            <a th:href="@{/restaurants/edit/{id}(id=${restaurant.restaurantId})}">編輯</a>
+            <a th:href="@{/restaurants/delete/{id}(id=${restaurant.restaurantId})}">刪除</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="/">返回主頁</a>
+</body>
+</html>

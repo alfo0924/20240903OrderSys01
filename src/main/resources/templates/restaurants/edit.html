@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>編輯餐廳</title>
+</head>
+<body>
+<h1>編輯餐廳</h1>
+<form th:action="@{/restaurants/edit/{id}(id=${restaurant.restaurantId})}" th:object="${restaurant}" method="post">
+    <input type="hidden" th:field="*{restaurantId}">
+
+    <label for="restaurantName">名稱:</label>
+    <input type="text" id="restaurantName" th:field="*{restaurantName}" required><br>
+
+    <label for="restaurantAddress">地址:</label>
+    <input type="text" id="restaurantAddress" th:field="*{restaurantAddress}" required><br>
+
+    <label for="restaurantPhone">電話:</label>
+    <input type="text" id="restaurantPhone" th:field="*{restaurantPhone}" required><br>
+
+    <label for="restaurantType">類型:</label>
+    <input type="text" id="restaurantType" th:field="*{restaurantType}" required><br>
+
+    <button type="submit">更新餐廳</button>
+</form>
+<a href="/restaurants">返回列表</a>
+</body>
+</html>

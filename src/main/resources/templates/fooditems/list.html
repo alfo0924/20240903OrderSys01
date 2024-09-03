@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>餐點列表</title>
+</head>
+<body>
+<h1>餐點列表</h1>
+<a href="/fooditems/add">添加新餐點</a>
+<table>
+    <thead>
+    <tr>
+        <th>餐點ID</th>
+        <th>菜單ID</th>
+        <th>餐點名稱</th>
+        <th>價格</th>
+        <th>狀態</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="foodItem : ${foodItems}">
+        <td th:text="${foodItem.itemsId}"></td>
+        <td th:text="${foodItem.menuId}"></td>
+        <td th:text="${foodItem.foodName}"></td>
+        <td th:text="${foodItem.foodPrice}"></td>
+        <td th:text="${foodItem.foodStatus}"></td>
+        <td>
+            <a th:href="@{/fooditems/edit/{id}(id=${foodItem.itemsId})}">編輯</a>
+            <a th:href="@{/fooditems/delete/{id}(id=${foodItem.itemsId})}">刪除</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="/">返回主頁</a>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>添加餐點</title>
+</head>
+<body>
+<h1>添加餐點</h1>
+<form th:action="@{/fooditems/add}" th:object="${foodItem}" method="post">
+    <label for="itemsId">餐點ID:</label>
+    <input type="text" id="itemsId" th:field="*{itemsId}" required><br>
+
+    <label for="menuId">菜單ID:</label>
+    <input type="text" id="menuId" th:field="*{menuId}" required><br>
+
+    <label for="foodName">餐點名稱:</label>
+    <input type="text" id="foodName" th:field="*{foodName}" required><br>
+
+    <label for="foodPrice">價格:</label>
+    <input type="number" id="foodPrice" th:field="*{foodPrice}" step="0.01" required><br>
+
+    <label for="foodStatus">狀態:</label>
+    <input type="text" id="foodStatus" th:field="*{foodStatus}" required><br>
+
+    <button type="submit">添加餐點</button>
+</form>
+<a href="/fooditems">返回列表</a>
+</body>
+</html>

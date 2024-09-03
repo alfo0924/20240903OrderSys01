@@ -5,7 +5,7 @@
 </head>
 <body>
 <h1>Customer List</h1>
-<a href="/customers/add">Add New Customer</a>
+<a href="/templates/customers/add">Add New Customer</a>
 <table>
     <thead>
     <tr>
@@ -25,8 +25,8 @@
         <td th:text="${customer.customerEmail}"></td>
         <td th:text="${customer.customerAddress}"></td>
         <td>
-            <a th:href="@{/customers/edit/{id}(id=${customer.customerId})}">Edit</a>
-            <a th:href="@{/customers/delete/{id}(id=${customer.customerId})}">Delete</a>
+            <a th:href="@{/templates/customers/edit/{id}(id=${customer.customerId})}">Edit</a>
+            <a th:href="@{/templates/customers/delete/{id}(id=${customer.customerId})}">Delete</a>
         </td>
     </tr>
     </tbody>

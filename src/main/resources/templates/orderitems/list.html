@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>訂單項目列表</title>
+</head>
+<body>
+<h1>訂單項目列表</h1>
+<a href="/orderitems/add">添加新訂單項目</a>
+<table>
+    <thead>
+    <tr>
+        <th>項目ID</th>
+        <th>訂單ID</th>
+        <th>商品ID</th>
+        <th>數量</th>
+        <th>金額</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="orderItem : ${orderItems}">
+        <td th:text="${orderItem.orderItemsId}"></td>
+        <td th:text="${orderItem.orderId}"></td>
+        <td th:text="${orderItem.itemsId}"></td>
+        <td th:text="${orderItem.counts}"></td>
+        <td th:text="${orderItem.amount}"></td>
+        <td>
+            <a th:href="@{/orderitems/edit/{id}(id=${orderItem.orderItemsId})}">編輯</a>
+            <a th:href="@{/orderitems/delete/{id}(id=${orderItem.orderItemsId})}">刪除</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="/">返回主頁</a>
+</body>
+</html>

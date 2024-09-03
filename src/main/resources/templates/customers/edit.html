@@ -5,7 +5,7 @@
 </head>
 <body>
 <h1>Edit Customer</h1>
-<form th:action="@{/customers/edit/{id}(id=${customer.customerId})}" th:object="${customer}" method="post">
+<form th:action="@{/templates/customers/edit/{id}(id=${customer.customerId})}" th:object="${customer}" method="post">
     <input type="hidden" th:field="*{customerId}">
 
     <label for="customerName">Name:</label>
@@ -22,6 +22,6 @@
 
     <button type="submit">Update Customer</button>
 </form>
-<a href="/customers">Back to List</a>
+<a href="/templates/customers/customers">Back to List</a>
 </body>
 </html>

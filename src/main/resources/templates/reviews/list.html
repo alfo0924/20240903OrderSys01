@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>評價列表</title>
+</head>
+<body>
+<h1>評價列表</h1>
+<a href="/reviews/add">添加新評價</a>
+<table>
+    <thead>
+    <tr>
+        <th>評價ID</th>
+        <th>訂單ID</th>
+        <th>顧客ID</th>
+        <th>餐廳ID</th>
+        <th>外送員ID</th>
+        <th>評論</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="review : ${reviews}">
+        <td th:text="${review.reviewId}"></td>
+        <td th:text="${review.orderId}"></td>
+        <td th:text="${review.customerId}"></td>
+        <td th:text="${review.restaurantId}"></td>
+        <td th:text="${review.deliveryId}"></td>
+        <td th:text="${review.comment}"></td>
+        <td>
+            <a th:href="@{/reviews/edit/{id}(id=${review.reviewId})}">編輯</a>
+            <a th:href="@{/reviews/delete/{id}(id=${review.reviewId})}">刪除</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="/">返回主頁</a>
+</body>
+</html>

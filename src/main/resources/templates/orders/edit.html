@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>編輯訂單</title>
+</head>
+<body>
+<h1>編輯訂單</h1>
+<form th:action="@{/orders/edit/{id}(id=${order.orderId})}" th:object="${order}" method="post">
+    <input type="hidden" th:field="*{orderId}">
+
+    <label for="customerId">顧客ID:</label>
+    <input type="number" id="customerId" th:field="*{customerId}" required><br>
+
+    <label for="restaurantId">餐廳ID:</label>
+    <input type="number" id="restaurantId" th:field="*{restaurantId}" required><br>
+
+    <label for="deliveryId">外送員ID:</label>
+    <input type="text" id="deliveryId" th:field="*{deliveryId}" required><br>
+
+    <label for="orderDate">訂單日期:</label>
+    <input type="date" id="orderDate" th:field="*{orderDate}" required><br>
+
+    <label for="orderPrice">訂單價格:</label>
+    <input type="number" id="orderPrice" th:field="*{orderPrice}" step="0.01" required><br>
+
+    <label for="orderStatus">訂單狀態:</label>
+    <input type="text" id="orderStatus" th:field="*{orderStatus}" required><br>
+
+    <button type="submit">更新訂單</button>
+</form>
+<a href="/orders">返回列表</a>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>編輯外送員</title>
+</head>
+<body>
+<h1>編輯外送員</h1>
+<form th:action="@{/delivery-personnel/edit/{id}(id=${deliveryPersonnel.deliveryId})}" th:object="${deliveryPersonnel}" method="post">
+    <input type="hidden" th:field="*{deliveryId}">
+
+    <label for="deliveryName">姓名:</label>
+    <input type="text" id="deliveryName" th:field="*{deliveryName}" required><br>
+
+    <label for="deliveryPhone">電話:</label>
+    <input type="text" id="deliveryPhone" th:field="*{deliveryPhone}" required><br>
+
+    <label for="deliveryVehicle">交通工具:</label>
+    <input type="text" id="deliveryVehicle" th:field="*{deliveryVehicle}" required><br>
+
+    <label for="deliveryStatus">狀態:</label>
+    <input type="text" id="deliveryStatus" th:field="*{deliveryStatus}" required><br>
+
+    <button type="submit">更新外送員</button>
+</form>
+<a href="/delivery-personnel">返回列表</a>
+</body>
+</html>
