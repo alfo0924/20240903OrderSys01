@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Customer List</title>
+    <title>客戶資訊</title>
 </head>
 <body>
-<h1>Customer List</h1>
-<a href="/templates/customers/add">Add New Customer</a>
+<h1>客戶資訊列表 </h1>
+<a href="/customers/add">新增客戶資料</a>
 <table>
     <thead>
     <tr>
         <th>ID</th>
-        <th>Name</th>
-        <th>Phone</th>
-        <th>Email</th>
-        <th>Address</th>
-        <th>Actions</th>
+        <th>名稱</th>
+        <th>手機</th>
+        <th>電子郵件</th>
+        <th>地址</th>
+        <th>狀態</th>
     </tr>
     </thead>
     <tbody>
@@ -31,5 +31,6 @@
     </tr>
     </tbody>
 </table>
+<a href="/">返回</a>
 </body>
 </html>

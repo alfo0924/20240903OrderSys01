@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Edit Customer</title>
+    <title>客戶編輯</title>
 </head>
 <body>
-<h1>Edit Customer</h1>
+<h1>客戶編輯</h1>
 <form th:action="@{/templates/customers/edit/{id}(id=${customer.customerId})}" th:object="${customer}" method="post">
     <input type="hidden" th:field="*{customerId}">
 
-    <label for="customerName">Name:</label>
+    <label for="customerName">名稱 :</label>
     <input type="text" id="customerName" th:field="*{customerName}" required><br>
 
-    <label for="customerPhoneNumber">Phone:</label>
+    <label for="customerPhoneNumber">手機 :</label>
     <input type="text" id="customerPhoneNumber" th:field="*{customerPhoneNumber}" required><br>
 
-    <label for="customerEmail">Email:</label>
+    <label for="customerEmail">電子郵件 :</label>
     <input type="email" id="customerEmail" th:field="*{customerEmail}" required><br>
 
-    <label for="customerAddress">Address:</label>
+    <label for="customerAddress">地址 :</label>
     <input type="text" id="customerAddress" th:field="*{customerAddress}" required><br>
 
-    <button type="submit">Update Customer</button>
+    <button type="submit">更新 </button>
 </form>
-<a href="/templates/customers/customers">Back to List</a>
+<a href="/templates/customers/customers">返回</a>
 </body>
 </html>

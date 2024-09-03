@@ -1,50 +1,54 @@
 package com.example._20240903ordersys01.controller;
 
+import com.example._20240903ordersys01.Servcie.DeliveryPersonnelService;
 import com.example._20240903ordersys01.model.DeliveryPersonnel;
-import com.example._20240903ordersys01.repository.DeliveryPersonnelRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-@RestController
-@RequestMapping("/api/delivery-personnel")
+@Controller
+@RequestMapping("/delivery-personnel")
 public class DeliveryPersonnelController {
 
     @Autowired
-    private DeliveryPersonnelRepository deliveryPersonnelRepository;
+    private DeliveryPersonnelService deliveryPersonnelService;
 
     @GetMapping
-    public List<DeliveryPersonnel> getAllDeliveryPersonnel() {
-        return deliveryPersonnelRepository.findAll();
+    public String listDeliveryPersonnel(Model model) {
+        model.addAttribute("deliveryPersonnels", deliveryPersonnelService.getAllDeliveryPersonnel());
+        return "delivery-personnel/list";
     }
 
-    @GetMapping("/{id}")
-    public DeliveryPersonnel getDeliveryPersonnelById(@PathVariable String id) {
-        return deliveryPersonnelRepository.findById(id).orElse(null);
+    @GetMapping("/add")
+    public String showAddForm(Model model) {
+        model.addAttribute("deliveryPersonnel", new DeliveryPersonnel());
+        return "delivery-personnel/add";
     }
 
-    @PostMapping
-    public DeliveryPersonnel createDeliveryPersonnel(@RequestBody DeliveryPersonnel deliveryPersonnel) {
-        return deliveryPersonnelRepository.save(deliveryPersonnel);
+    @PostMapping("/add")
+    public String addDeliveryPersonnel(@ModelAttribute DeliveryPersonnel deliveryPersonnel) {
+        deliveryPersonnelService.saveDeliveryPersonnel(deliveryPersonnel);
+        return "redirect:/delivery-personnel";
     }
 
-    @PutMapping("/{id}")
-    public DeliveryPersonnel updateDeliveryPersonnel(@PathVariable String id, @RequestBody DeliveryPersonnel deliveryPersonnelDetails) {
-        DeliveryPersonnel deliveryPersonnel = deliveryPersonnelRepository.findById(id).orElse(null);
-        if (deliveryPersonnel != null) {
-            deliveryPersonnel.setDeliveryName(deliveryPersonnelDetails.getDeliveryName());
-            deliveryPersonnel.setDeliveryPhone(deliveryPersonnelDetails.getDeliveryPhone());
-            deliveryPersonnel.setDeliveryVehicle(deliveryPersonnelDetails.getDeliveryVehicle());
-            deliveryPersonnel.setDeliveryStatus(deliveryPersonnelDetails.getDeliveryStatus());
-            return deliveryPersonnelRepository.save(deliveryPersonnel);
-        }
-        return null;
+    @GetMapping("/edit/{id}")
+    public String showEditForm(@PathVariable String id, Model model) {
+        model.addAttribute("deliveryPersonnel", deliveryPersonnelService.getDeliveryPersonnelById(id).orElseThrow());
+        return "delivery-personnel/edit";
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteDeliveryPersonnel(@PathVariable String id) {
-        deliveryPersonnelRepository.deleteById(id);
+    @PostMapping("/edit/{id}")
+    public String updateDeliveryPersonnel(@PathVariable String id, @ModelAttribute DeliveryPersonnel deliveryPersonnel) {
+        deliveryPersonnel.setDeliveryId(id);
+        deliveryPersonnelService.saveDeliveryPersonnel(deliveryPersonnel);
+        return "redirect:/delivery-personnel";
     }
 
+    @GetMapping("/delete/{id}")
+    public String deleteDeliveryPersonnel(@PathVariable String id) {
+        deliveryPersonnelService.deleteDeliveryPersonnel(id);
+        return "redirect:/delivery-personnel";
+    }
 }

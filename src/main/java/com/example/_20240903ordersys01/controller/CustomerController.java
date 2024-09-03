@@ -1,49 +1,53 @@
 package com.example._20240903ordersys01.controller;
 
 import com.example._20240903ordersys01.model.Customer;
-import com.example._20240903ordersys01.repository.CustomerRepository;
+import com.example._20240903ordersys01.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-@RestController
-@RequestMapping("/api/customers")
+@Controller
+@RequestMapping("/customers")
 public class CustomerController {
 
     @Autowired
-    private CustomerRepository customerRepository;
+    private CustomerService customerService;
 
     @GetMapping
-    public List<Customer> getAllCustomers() {
-        return customerRepository.findAll();
+    public String listCustomers(Model model) {
+        model.addAttribute("customers", customerService.getAllCustomers());
+        return "customers/list";
     }
 
-    @GetMapping("/{id}")
-    public Customer getCustomerById(@PathVariable Integer id) {
-        return customerRepository.findById(id).orElse(null);
+    @GetMapping("/add")
+    public String showAddForm(Model model) {
+        model.addAttribute("customer", new Customer());
+        return "customers/add";
     }
 
-    @PostMapping
-    public Customer createCustomer(@RequestBody Customer customer) {
-        return customerRepository.save(customer);
+    @PostMapping("/add")
+    public String addCustomer(@ModelAttribute Customer customer) {
+        customerService.saveCustomer(customer);
+        return "redirect:/customers";
     }
 
-    @PutMapping("/{id}")
-    public Customer updateCustomer(@PathVariable Integer id, @RequestBody Customer customerDetails) {
-        Customer customer = customerRepository.findById(id).orElse(null);
-        if (customer != null) {
-            customer.setCustomerName(customerDetails.getCustomerName());
-            customer.setCustomerPhoneNumber(customerDetails.getCustomerPhoneNumber());
-            customer.setCustomerEmail(customerDetails.getCustomerEmail());
-            customer.setCustomerAddress(customerDetails.getCustomerAddress());
-            return customerRepository.save(customer);
-        }
-        return null;
+    @GetMapping("/edit/{id}")
+    public String showEditForm(@PathVariable Integer id, Model model) {
+        model.addAttribute("customer", customerService.getCustomerById(id).orElseThrow());
+        return "customers/edit";
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteCustomer(@PathVariable Integer id) {
-        customerRepository.deleteById(id);
+    @PostMapping("/edit/{id}")
+    public String updateCustomer(@PathVariable Integer id, @ModelAttribute Customer customer) {
+        customer.setCustomerId(id);
+        customerService.saveCustomer(customer);
+        return "redirect:/customers";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteCustomer(@PathVariable Integer id) {
+        customerService.deleteCustomer(id);
+        return "redirect:/customers";
     }
 }

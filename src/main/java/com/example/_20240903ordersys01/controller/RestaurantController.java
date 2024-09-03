@@ -1,49 +1,53 @@
 package com.example._20240903ordersys01.controller;
 
 import com.example._20240903ordersys01.model.Restaurant;
-import com.example._20240903ordersys01.repository.RestaurantRepository;
+import com.example._20240903ordersys01.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-@RestController
-@RequestMapping("/api/restaurants")
+@Controller
+@RequestMapping("/restaurants")
 public class RestaurantController {
 
     @Autowired
-    private RestaurantRepository restaurantRepository;
+    private RestaurantService restaurantService;
 
     @GetMapping
-    public List<Restaurant> getAllRestaurants() {
-        return restaurantRepository.findAll();
+    public String listRestaurants(Model model) {
+        model.addAttribute("restaurants", restaurantService.getAllRestaurants());
+        return "restaurants/list";
     }
 
-    @GetMapping("/{id}")
-    public Restaurant getRestaurantById(@PathVariable Integer id) {
-        return restaurantRepository.findById(id).orElse(null);
+    @GetMapping("/add")
+    public String showAddForm(Model model) {
+        model.addAttribute("restaurant", new Restaurant());
+        return "restaurants/add";
     }
 
-    @PostMapping
-    public Restaurant createRestaurant(@RequestBody Restaurant restaurant) {
-        return restaurantRepository.save(restaurant);
+    @PostMapping("/add")
+    public String addRestaurant(@ModelAttribute Restaurant restaurant) {
+        restaurantService.saveRestaurant(restaurant);
+        return "redirect:/restaurants";
     }
 
-    @PutMapping("/{id}")
-    public Restaurant updateRestaurant(@PathVariable Integer id, @RequestBody Restaurant restaurantDetails) {
-        Restaurant restaurant = restaurantRepository.findById(id).orElse(null);
-        if (restaurant != null) {
-            restaurant.setRestaurantName(restaurantDetails.getRestaurantName());
-            restaurant.setRestaurantAddress(restaurantDetails.getRestaurantAddress());
-            restaurant.setRestaurantPhone(restaurantDetails.getRestaurantPhone());
-            restaurant.setRestaurantType(restaurantDetails.getRestaurantType());
-            return restaurantRepository.save(restaurant);
-        }
-        return null;
+    @GetMapping("/edit/{id}")
+    public String showEditForm(@PathVariable Integer id, Model model) {
+        model.addAttribute("restaurant", restaurantService.getRestaurantById(id).orElseThrow());
+        return "restaurants/edit";
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteRestaurant(@PathVariable Integer id) {
-        restaurantRepository.deleteById(id);
+    @PostMapping("/edit/{id}")
+    public String updateRestaurant(@PathVariable Integer id, @ModelAttribute Restaurant restaurant) {
+        restaurant.setRestaurantId(id);
+        restaurantService.saveRestaurant(restaurant);
+        return "redirect:/restaurants";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteRestaurant(@PathVariable Integer id) {
+        restaurantService.deleteRestaurant(id);
+        return "redirect:/restaurants";
     }
 }
