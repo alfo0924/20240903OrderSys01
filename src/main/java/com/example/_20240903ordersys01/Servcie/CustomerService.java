@@ -1,4 +1,4 @@
-package com.example._20240903ordersys01.service;
+package com.example._20240903ordersys01.Servcie;
 
 import com.example._20240903ordersys01.model.Customer;
 import com.example._20240903ordersys01.repository.CustomerRepository;

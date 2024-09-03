@@ -1,7 +1,8 @@
 package com.example._20240903ordersys01.controller;
 
+import com.example._20240903ordersys01.Servcie.CustomerService;
 import com.example._20240903ordersys01.model.Customer;
-import com.example._20240903ordersys01.service.CustomerService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
