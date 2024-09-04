@@ -1,20 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>客戶資訊</title>
+    <title>顧客列表</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
-<h1>客戶資訊列表 </h1>
-<a href="/customers/add">新增客戶資料</a>
+<h1>顧客列表</h1>
+<a href="/customers/add">添加新顧客</a>
 <table>
     <thead>
     <tr>
         <th>ID</th>
-        <th>名稱</th>
-        <th>手機</th>
+        <th>姓名</th>
+        <th>電話號碼</th>
         <th>電子郵件</th>
         <th>地址</th>
-        <th>狀態</th>
+        <th>操作</th>
     </tr>
     </thead>
     <tbody>
@@ -25,12 +41,12 @@
         <td th:text="${customer.customerEmail}"></td>
         <td th:text="${customer.customerAddress}"></td>
         <td>
-            <a th:href="@{/templates/customers/edit/{id}(id=${customer.customerId})}">Edit</a>
-            <a th:href="@{/templates/customers/delete/{id}(id=${customer.customerId})}">Delete</a>
+            <a th:href="@{/customers/edit/{id}(id=${customer.customerId})}">編輯</a>
+            <a th:href="@{/customers/delete/{id}(id=${customer.customerId})}" onclick="return confirm('確定要刪除嗎？');">刪除</a>
         </td>
     </tr>
     </tbody>
 </table>
-<a href="/">返回</a>
+<a href="/">返回主頁</a>
 </body>
 </html>

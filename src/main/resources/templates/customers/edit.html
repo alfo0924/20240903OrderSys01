@@ -1,27 +1,48 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>客戶編輯</title>
+    <title>編輯顧客</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        label {
+            display: inline-block;
+            width: 100px;
+            margin-bottom: 10px;
+        }
+        input[type="text"], input[type="email"] {
+            width: 300px;
+            padding: 5px;
+        }
+        input[type="submit"] {
+            margin-top: 10px;
+            padding: 5px 10px;
+        }
+    </style>
 </head>
 <body>
-<h1>客戶編輯</h1>
-<form th:action="@{/templates/customers/edit/{id}(id=${customer.customerId})}" th:object="${customer}" method="post">
+<h1>編輯顧客</h1>
+<form th:action="@{/customers/edit/{id}(id=${customer.customerId})}" th:object="${customer}" method="post">
     <input type="hidden" th:field="*{customerId}">
 
-    <label for="customerName">名稱 :</label>
+    <label for="customerName">姓名:</label>
     <input type="text" id="customerName" th:field="*{customerName}" required><br>
 
-    <label for="customerPhoneNumber">手機 :</label>
+    <label for="customerPhoneNumber">電話號碼:</label>
     <input type="text" id="customerPhoneNumber" th:field="*{customerPhoneNumber}" required><br>
 
-    <label for="customerEmail">電子郵件 :</label>
+    <label for="customerEmail">電子郵件:</label>
     <input type="email" id="customerEmail" th:field="*{customerEmail}" required><br>
 
-    <label for="customerAddress">地址 :</label>
+    <label for="customerAddress">地址:</label>
     <input type="text" id="customerAddress" th:field="*{customerAddress}" required><br>
 
-    <button type="submit">更新 </button>
+    <input type="submit" value="更新顧客">
 </form>
-<a href="/templates/customers/customers">返回</a>
+<a href="/customers">返回列表</a>
 </body>
 </html>

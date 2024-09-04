@@ -1,19 +1,84 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="zh-TW">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>外送訂單系統</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+        }
+        header {
+            background: #35424a;
+            color: #ffffff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #e8491d 3px solid;
+        }
+        header h1 {
+            margin: 0;
+            text-align: center;
+            padding-bottom: 20px;
+        }
+        .menu {
+            background: #ffffff;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .menu ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .menu li {
+            padding: 10px 0;
+            border-bottom: 1px solid #e8e8e8;
+        }
+        .menu li:last-child {
+            border-bottom: none;
+        }
+        .menu a {
+            color: #333;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+        .menu a:hover {
+            color: #e8491d;
+        }
+    </style>
 </head>
 <body>
-<h1>外送訂單系統</h1>
-<ul>
-    <li><a href="/customers">顧客管理</a></li>
-    <li><a href="/delivery-personnel">外送員管理</a></li>
-    <li><a href="/restaurants">餐廳管理</a></li>
-    <li><a href="/orders">訂單管理</a></li>
-    <li><a href="/orderitems">訂單項目管理</a></li>
-    <li><a href="/menus">菜單管理</a></li>
-    <li><a href="/fooditems">餐點管理</a></li>
-    <li><a href="/reviews">評價管理</a></li>
-</ul>
+<header>
+    <div class="container">
+        <h1>外送訂單系統</h1>
+    </div>
+</header>
+
+<div class="container">
+    <div class="menu">
+        <ul>
+            <li><a href="/customers">顧客管理</a></li>
+            <li><a href="/delivery-personnel">外送員管理</a></li>
+            <li><a href="/restaurants">餐廳管理</a></li>
+            <li><a href="/orders">訂單管理</a></li>
+            <li><a href="/order-items">訂單項目管理</a></li>
+            <li><a href="/menus">菜單管理</a></li>
+            <li><a href="/food-items">餐點管理</a></li>
+            <li><a href="/reviews">評價管理</a></li>
+        </ul>
+    </div>
+</div>
 </body>
 </html>
