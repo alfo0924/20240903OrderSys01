@@ -8,13 +8,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+
 @Controller
 @RequestMapping("/customers")
 public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
-
+//    @GetMapping
+//    public List<Customer> getAllCustomers() {
+//        return customerService.getAllCustomers();
+//    }
     @GetMapping
     public String listCustomers(Model model) {
         model.addAttribute("customers", customerService.getAllCustomers());
